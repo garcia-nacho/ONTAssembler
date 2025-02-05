@@ -52,7 +52,7 @@ Genome Size: Adjust GENOME_SIZE in run_assembly.sh (default: 4.1m).
 
 ## Workflow Overview
 
-<pre>graph TD
+<pre>
   A [FASTQ] -->|Guppy| B(FASTQ)
   A --> B{QC & Filtering}
   B -->|NanoFilt| C[Filtered Reads]
