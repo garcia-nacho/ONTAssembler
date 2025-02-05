@@ -42,10 +42,11 @@ inputfolder/
            ├── file2.fastq.gz     
 </pre>
 
-Optional Parameters
-Illumina Hybrid Polishing: Place paired-end reads in data/input/illumina_R1.fastq and data/input/illumina_R2.fastq.
+## Optional Parameters    
+**Illumina Hybrid Polishing:** Place paired-end R1 and R2 fastq.gz files alongside the ONT files.    
+Note that files containing the strings *"_R1"* and *"_R2"* will be exluded from the first steps of the pipeline and only used on the Illumina polishing steps 
 
-Threads: Modify THREADS in run_assembly.sh (default: 16).
+**Threads:** Modify THREADS in run_assembly.sh (default: 16).
 
 Genome Size: Adjust GENOME_SIZE in run_assembly.sh (default: 4.1m).
 
