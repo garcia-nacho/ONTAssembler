@@ -44,66 +44,42 @@ inputfolder/
 
 ## Optional Parameters    
 **Illumina Hybrid Polishing:** Place paired-end R1 and R2 fastq.gz files alongside the ONT files.    
-Note that files containing the strings *"_R1"* and *"_R2"* will be exluded from the first steps of the pipeline and only used on the Illumina polishing steps 
+Note that files containing the strings *"_R1"* and *"_R2"* will be exluded from the first steps of the pipeline and only used on the Illumina polishing steps    
 
-**Threads:** Modify THREADS in run_assembly.sh (default: 16).
+**Threads:** Modify THREADS in run_assembly.sh (default: 16).    
 
-Genome Size: Adjust GENOME_SIZE in run_assembly.sh (default: 4.1m).
+Genome Size: Adjust GENOME_SIZE in run_assembly.sh (default: 4.1m).    
 
-Workflow Overview
-mermaid
-Copy
-graph TD
-  A[FAST5] -->|Guppy| B(FASTQ)
-  B --> C{QC & Filtering}
-  C -->|NanoFilt| D[Filtered Reads]
-  D --> E[Flye Assembly]
-  E --> F[Racon Polish]
-  F --> G[Medaka Polish]
-  G --> H{Illumina Data?}
-  H -->|Yes| I[Pilon Polish]
-  H -->|No| J[Evaluation]
-  I --> J
-  J --> K[Circularization]
-  K --> L[Annotation]
-Expected Results
-Copy
+## Workflow Overview
+
+<pre>graph TD
+  A [FASTQ] -->|Guppy| B(FASTQ)
+  A --> B{QC & Filtering}
+  B -->|NanoFilt| C[Filtered Reads]
+  C --> D[Flye Assembly]
+  D --> E[Racon Polish]
+  E --> F[Medaka Polish]
+  F --> G{Illumina Data?}
+  G -->|Yes| H[Pilon Polish]
+  G -->|No| I[Evaluation]
+ </pre>
+
+
+## Expected Results
+<pre>
 data/output/
 ├── assembly/          # Flye draft assembly
 ├── polished/          # Racon + Medaka outputs
 ├── quast/             # Assembly evaluation report
 ├── checkm/            # Completeness/contamination metrics
-├── circularized/      # Circularized genome
-└── annotation/        # Prokka gene annotations
-Troubleshooting
-Common Issues
-GLIBCXX Errors:
-Rebuild the Docker image using the updated Dockerfile in this repo.
 
-Guppy Installation:
-Mount your licensed Guppy directory to /opt/ont/guppy in the container.
+</pre>
 
-CheckM Database:
-Ensure the database is downloaded to /opt/checkm_data inside the container.
+## License
+This pipeline is MIT-licensed. 
 
-Citation
-If you use this pipeline, please cite:
-
-Flye: DOI:10.1038/s41587-019-0072-8
-
-Medaka: GitHub
-
-Prokka: DOI:10.1093/bioinformatics/btu153
-
-See CITATIONS.md for full tool references.
-
-License
-This pipeline is MIT-licensed. Note that Guppy requires a separate license from Oxford Nanopore Technologies.
-
-Contributing
+## Contributing
 Pull requests are welcome! For major changes, please open an issue first.
 
-Contact
-For questions or support, contact your.email@example.com.
-
-This README provides clear instructions for users to run your pipeline and understand its components. Adjust paths, parameters, and contact details as needed!
+## Contact
+For questions or support, contact *iggl [AT] fhi [DOT] no*
