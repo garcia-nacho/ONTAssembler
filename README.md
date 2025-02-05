@@ -32,14 +32,14 @@ No installation is needed since it runs from a docker image.
 
 ## Input Structure
 
-inputfolder/
-    ├── sample1/ 
-    |      ├── file1.fastq.gz # Fastq Nanopore files
-    |      ├── file2.fastq.gz 
-    |
-    ├── sample2/ 
-           ├── file1.fastq.gz # Fastq Nanopore files
-           ├── file2.fastq.gz 
+inputfolder/   
+    ├── sample1/    
+    |      ├── file1.fastq.gz # Fastq Nanopore files   
+    |      ├── file2.fastq.gz    
+    |   
+    ├── sample2/    
+           ├── file1.fastq.gz # Fastq Nanopore files   
+           ├── file2.fastq.gz     
 
 
 Optional Parameters
