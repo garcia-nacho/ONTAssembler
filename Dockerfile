@@ -16,12 +16,14 @@ RUN apt-get update && apt-get install -y \
     libbz2-dev && \
     rm -rf /var/lib/apt/lists/*
 
+#RUN ln -sf /usr/lib/gcc/x86_64-linux-gnu/12/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libstdc++.so.6
+
 # Create Conda environments
 USER docker
+RUN conda install -c conda-forge libstdcxx-ng
 RUN conda install -c bioconda -c conda-forge nanoplot=1.40.0
 RUN conda install -c bioconda -c conda-forge nanofilt=2.8.0
 RUN conda install -c bioconda -c conda-forge flye
-RUN conda config --set solver classic
 RUN conda install -c bioconda -c conda-forge minimap2
 RUN conda install -c bioconda -c conda-forge racon=1.5.0
 RUN conda install -c bioconda -c conda-forge checkm-genome
@@ -32,6 +34,7 @@ RUN conda install -c bioconda -c conda-forge pilon
 RUN conda create -n medaka -c conda-forge -c bioconda medaka
 
 USER root
+
 RUN apt-get update && apt-get install -y pkg-config libfreetype6-dev libpng-dev python3-matplotlib
 USER docker
 RUN cd /home/docker/ && git clone https://github.com/ablab/quast && \ 
@@ -46,8 +49,11 @@ RUN mkdir /home/docker/checkm && cd /home/docker/checkm && \
     wget -q https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz && \
     tar -xvzf checkm_data_2015_01_16.tar.gz && rm checkm_data_2015_01_16.tar.gz
 RUN mkdir /home/docker/code
-COPY ONTAssenbler.sh /home/docker/code/ONTAssenbler.sh
-#RUN chmod +x /home/docker/code/ONTAssenbler.sh
-
+COPY ONTAssembler.sh /home/docker/code/ONTAssembler.sh
+USER root
+RUN chmod +x /home/docker/code/ONTAssembler.sh
+USER docker
 # Set working directory
 WORKDIR /Data
+CMD ["sh", "-c", "/home/docker/code/ONTAssembler.sh"]
+
