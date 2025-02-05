@@ -2,11 +2,9 @@
 
 set -e
 
-# Configuration to be fixed on the docker container
-
-GENOME_SIZE="4.1m"            
-THREADS=10                    
-M=500
+GENOME_SIZE=${1}            
+THREADS=${2}                    
+M=${3}
 homedir=/Data
 
 echo "Running ONT assembly..."

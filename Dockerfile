@@ -55,5 +55,9 @@ RUN chmod +x /home/docker/code/ONTAssembler.sh
 USER docker
 # Set working directory
 WORKDIR /Data
-CMD ["sh", "-c", "/home/docker/code/ONTAssembler.sh"]
+ENV GENOME_SIZE="4.1m"            
+ENV THREADS=10                    
+ENV M=500
+
+CMD ["sh", "-c", "/home/docker/code/ONTAssembler.sh ${GENOME_SIZE} ${THREADS} ${M}"]
 
