@@ -31,7 +31,7 @@ No installation is needed since it runs from a docker image.
 <code>docker run -it --rm -v $(pwd):/Data ghcr.io/garcia-nacho/ontassembler</code>
 
 ## Input Structure
-
+<pre>
 inputfolder/   
     ├── sample1/    
     |      ├── file1.fastq.gz # Fastq Nanopore files   
@@ -40,7 +40,7 @@ inputfolder/
     ├── sample2/    
            ├── file1.fastq.gz # Fastq Nanopore files   
            ├── file2.fastq.gz     
-
+</pre>
 
 Optional Parameters
 Illumina Hybrid Polishing: Place paired-end reads in data/input/illumina_R1.fastq and data/input/illumina_R2.fastq.
