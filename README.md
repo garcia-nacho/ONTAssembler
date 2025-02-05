@@ -46,9 +46,11 @@ inputfolder/
 **Illumina Hybrid Polishing:** Place paired-end R1 and R2 fastq.gz files alongside the ONT files.    
 Note that files containing the strings *"_R1"* and *"_R2"* will be exluded from the first steps of the pipeline and only used on the Illumina polishing steps    
 
-**Threads:** Modify THREADS in run_assembly.sh (default: 16).    
+**Threads:** Modify THREADS in run_assembly.sh (default: 10). This can be adjusted using the flag *-e THREADS=X* when running the docker command (e.g.,<code>-e THREADS=12</code>)    
 
-Genome Size: Adjust GENOME_SIZE in run_assembly.sh (default: 4.1m).    
+**Genome Size:** Adjust GENOME_SIZE in run_assembly.sh (default: 4.1m). This can be adjusted using the flag *-e GENOME_SIZE="X"* when running the docker command  (e.g.,<code>-e GENOME_SIZE="3.5m"</code>)        
+
+**Minimum read size** The minimum read size can be adjusted (default 500nt ) This can be adjusted using the flag *-e M=X* when running the docker command (e.g., <code>-e GENOME_SIZE="3.5m"</code>)        
 
 ## Workflow Overview
 
