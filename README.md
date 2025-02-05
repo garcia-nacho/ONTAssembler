@@ -2,60 +2,46 @@
 A reproducible pipeline for de novo assembly of bacterial genomes using Oxford Nanopore (and optionally Illumina) sequencing data. 
 This workflow combines long-read assembly (Flye), polishing (Racon + Medaka), and optional hybrid polishing with Illumina data (Pilon) to generate high-quality bacterial genomes.
 
-## Key Features
-Optimized for accuracy: Two-step polishing (Racon + Medaka) resolves Nanopore-specific errors.
+## Key Features   
+Optimized for accuracy: Two-step polishing (Racon + Medaka) resolves Nanopore-specific errors.   
 
-Containerized workflow: Docker image for dependency management.
+Containerized workflow: Docker image for dependency management.   
 
-Hybrid polishing: Optional integration with Illumina data using Pilon.
+Hybrid polishing: Optional integration with Illumina data using Pilon.   
 
-QC and evaluation: Includes QUAST, CheckM, and NanoPlot for assembly metrics.
+QC and evaluation: Includes QUAST, CheckM, and NanoPlot for assembly metrics.   
 
-Circularization and annotation: Circlator for genome circularization and Prokka for gene annotation.
 
-Prerequisites
-Docker (tested on v24.0+)
 
-Guppy Basecaller (optional; required if starting from FAST5 files)
+## Prerequisites   
+Docker (tested on v20.0+)   
 
-Computational Resources:
+### Computational Resources:   
 
-CPUs: 8+ cores recommended
+CPUs: 8+ cores recommended   
 
-RAM: 16+ GB
+RAM: 16+ GB   
 
-Storage: 50 GB free space
+Storage: 50 GB free space   
 
-Note: The genome size of B. pertussis is ~4.1 Mb.
+## Installation
 
-Installation
-1. Clone Repository
-bash
-Copy
-git clone https://github.com/yourusername/bpertussis-nanopore-assembly.git
-cd bpertussis-nanopore-assembly
-2. Build Docker Image
-bash
-Copy
-docker build -t bpertussis_assembly .
-3. Download CheckM Database (Inside Container)
-bash
-Copy
-docker run -it bpertussis_assembly checkm data setRoot /opt/checkm_data
-Usage
-Run the Pipeline
-bash
-Copy
-docker run -it --rm \
-  -v /path/to/your/data:/data/input \
-  -v /path/to/output:/data/output \
-  bpertussis_assembly \
-  ./run_assembly.sh
-Input Structure
-Copy
-data/input/
-├── fast5/           # Raw Nanopore signals (optional)
-└── reads.fastq      # OR basecalled FASTQ
+No installation is needed since it runs from a docker image.   
+
+<code>docker run -it --rm -v $(pwd):/Data ghcr.io/garcia-nacho/ontassembler</code>
+
+## Input Structure
+
+inputfolder/
+    ├── sample1/ 
+    |      ├── file1.fastq.gz # Fastq Nanopore files
+    |      ├── file2.fastq.gz 
+    |
+    ├── sample2/ 
+           ├── file1.fastq.gz # Fastq Nanopore files
+           ├── file2.fastq.gz 
+
+
 Optional Parameters
 Illumina Hybrid Polishing: Place paired-end reads in data/input/illumina_R1.fastq and data/input/illumina_R2.fastq.
 
